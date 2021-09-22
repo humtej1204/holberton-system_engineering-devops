@@ -1,3 +1,2 @@
 #!/bin/bash
-file -C -m school.mgc
-0 string SCHOOL
+file -C -m offset 0 type string pstring SCHOOL school.mgc
