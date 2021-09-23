@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo find ./ -type d -exec chmod +x {} \;
+chmod --reference=d +x ./
