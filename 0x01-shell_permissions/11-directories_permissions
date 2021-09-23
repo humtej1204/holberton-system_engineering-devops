@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R --reference=d +x .
+chmod a+X *
