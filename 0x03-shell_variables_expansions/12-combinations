@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e '\n' {a..z}{a..z} | find -deleate "oo" | tr " " "\n"
+echo {a..z}{a..z} | grep -v [o][o] | tr " " "\n"
