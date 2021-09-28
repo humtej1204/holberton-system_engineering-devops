@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e '\n' {a..z}{a..z} | tr -d 'oo' | tr " " "\n"
+echo -e '\n' {a..z}{a..z} | find -deleate "oo" | tr " " "\n"
