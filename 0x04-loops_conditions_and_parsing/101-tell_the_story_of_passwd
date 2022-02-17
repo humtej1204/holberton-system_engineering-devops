@@ -10,5 +10,5 @@ do
 		coln[$i]=$elm
 		i=$(( i + 1 ))
 	done
-	echo "The user ${coln[1]} is part of the ${coln[4]} gang, lives in ${coln[6]} and rides ${coln[7]}. ${coln[3]}''ss place is protected by the passcode ${coln[2]}, more info about the user here: ${coln[5]}"
+	echo "The user ${coln[1]} is part of the ${coln[4]} gang, lives in ${coln[6]} and rides ${coln[7]}. ${coln[3]}'s place is protected by the passcode ${coln[2]}, more info about the user here: ${coln[5]}"
 done < "$file"
