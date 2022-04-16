@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+#asd
 ssh -i ~/.ssh/school ubuntu@34.74.181.130
