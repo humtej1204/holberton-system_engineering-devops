@@ -1,0 +1,7 @@
+#!/bin/bash
+#{Command} ssh-keygen - It's used to generate public-private keys
+#{Flags}
+#	-f : Specifies the filename of the key file. 
+#	-b : Specifies the number of bits in the key to create.
+#	-N : Provides the new passphrase.
+ssh-keygen -f school -b 4096 -N betty

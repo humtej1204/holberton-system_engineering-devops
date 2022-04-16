@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ssh-copy-id -f -i ~/.ssh/id_rsa.pub ubuntu@34.74.181.130
+#cat ~/.ssh/id_rsa.pub | ssh ubuntu@34.74.181.130 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
