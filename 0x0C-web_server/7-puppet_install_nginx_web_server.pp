@@ -1,9 +1,11 @@
 # Install and configure an Nginx server
 exec { 'configuration':
   provider => shell,
-  command  => ['sudo apt-get -y update', 'sudo apt-get -y install nginx',
-              'sudo chown -R ubuntu /var/www',
-              'echo "Hellow World" > /var/www/html/index.nginx-debian.html',
-              'sudo sed -i "53i\ \n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=_WRBAzV-iHI&t=1s}\n" /etc/nginx/sites-available/default',
-              'sudo service nginx restart'],
+  command  => 'sudo apt-get -y update ;\
+                sudo apt-get -y install nginx ;\
+                sudo chown -R ubuntu /var/www ;\
+                echo "Hello World" | sudo tee /var/www/html/index.nginx-debian.html ;\
+                sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/MiguelBarreraDev permanent;/" \
+                    /etc/nginx/sites-available/default ;\
+                sudo service nginx start',
 }
