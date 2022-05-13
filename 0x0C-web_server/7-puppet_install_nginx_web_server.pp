@@ -1,6 +1,7 @@
 # Install and configure an Nginx server
 package { 'nginx':
-  ensure => installed,
+ ensure  => installed,
+ command => 'sudo apt install nginx -y',
 }
 exec { '':
   provider => shell,
