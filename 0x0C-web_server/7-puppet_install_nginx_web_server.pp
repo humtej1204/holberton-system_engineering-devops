@@ -3,7 +3,7 @@ package { 'nginx':
  ensure  => installed,
  command => 'sudo apt install nginx -y',
 }
-exec { '':
+exec { 'configuration':
   provider => shell,
   command  => ['sudo chown -R ubuntu /var/www',
               'echo "Hellow World" > /var/www/html/index.nginx-debian.html',
