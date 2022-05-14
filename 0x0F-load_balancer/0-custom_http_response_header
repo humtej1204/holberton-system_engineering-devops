@@ -1,32 +1,16 @@
 #!/usr/bin/env bash
-# Redirect
-SU=$(whoami)
-DIR="/etc/nginx/sites-available/default"
-NEW_URL="https://twitter.com/Luffy_981"
-OLD_URL="/redirect_me"
-REDIRECT="\tlocation ${OLD_URL} {\n\t\treturn 301 ${NEW_URL};\n\t}"
-DIR_SERVER="/var/www/html/"
-ERROR404="server {\n\terror_page 404 \/error404.html;"
-SERVED_BY="server {\n\tadd_header X-Served-By \$hostname};"
+# Install nginx web server
 
-if [[ "$SU" == "root" ]]; then
-	SU="sudo"
-else
-	echo "your need run with prefix sudo"
-	exit
-fi
-
-$SU usermod -aG $SU "$(whoami)"
-$SU apt-get -y update
-$SU apt-get -y install nginx
-
-
-$SU mkdir --parents "${DIR_SERVER}"
-$SU echo "Hello World" > "${DIR_SERVER}index.html"
-$SU echo "Ceci n'est pas une page" > "${DIR_SERVER}error404.html"
-
-
-$SU sed -i "/server_name _;/ a\\${REDIRECT}" $DIR
-sed -i "s/^server\s{/$ERROR404/1" $DIR
-sed -i "s/^server\s{/$SERVED_BY/1" $DIR
-$SU service nginx restart
+sudo apt-get update
+sudo apt install nginx -y
+sudo chown -R ubuntu /var/www/html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+# Adding lines to the file /etc/nginx/sites-available/default
+str_redir="\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=_WRBAzV-iHI&t=1s;\n\t}\n"
+str_err="\n\terror_page 404 /404.html;\n\tlocation = /var/www/html/404.html {\n\t\tinternal;\n\t}"
+host=$(hostname)
+str_head="\t\tadd_header X-Served-By $host;\n"
+sudo sed -i "47i\ $str_err$str_redir" /etc/nginx/sites-available/default
+sudo sed -i -r "/^[^#].*try_files.*=404/ s/^/${str_head}/" /etc/nginx/sites-available/default
+sudo service nginx restart
+sudo service nginx reload
