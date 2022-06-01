@@ -13,16 +13,12 @@ header = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
 
 
 def top_ten(subreddit):
-    url = "https://www.reddit.com/r/" + str(subreddit) + "/hot.json"
+    url = "https://www.reddit.com/r/" + str(subreddit) + "/hot.json?limit=10"
     res = requests.get(url, headers=header)
-    i = 0
     if res.status_code == 200:
         titles = res.json().get("data").get("children")
         for t in titles:
-            if i >= 10:
-                break
             print(t.get("data").get("title"))
-            i = i + 1
     else:
         print(None)
     return
