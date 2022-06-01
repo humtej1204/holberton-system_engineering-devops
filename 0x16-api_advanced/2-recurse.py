@@ -27,8 +27,8 @@ def recurse(subreddit, hot_list=[], after=""):
         res = res.json()
         after = res.get('data').get('after')
         hots = res.get('data').get('children')
-        #hot_list += list(map(lambda elm: elm.get('data').get('title'), hots))
-        for l in hots:
-            hot_list.append(l.get('data').get('title'))
+        # hot_list += list(map(lambda elm: elm.get('data').get('title'), hots))
+        for elm in hots:
+            hot_list.append(elm.get('data').get('title'))
         return recurse(subreddit, hot_list, after)
     return None
