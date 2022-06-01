@@ -8,20 +8,20 @@ the function should return None.
 
 import requests
 
-'''Data'''
-header = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
-          AppleWebKit/537.36 (KHTML, like Gecko) \
-          Chrome/70.0.3538.77 Safari/537.36"}
 
+def recurse(subreddit, hot_list=[], after=""):
+    """List containing the titles of all hot articles for a given subreddit"""
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    res = requests.get(url, headers={'User-Agent': 'AngentMEGO'},
+                       params={'after': after})
 
-def recurse(subreddit, hot_list=[]):
-    url = "https://www.reddit.com/r/" + str(subreddit) + "/hot.json"
-    res = requests.get(url, headers=header)
+    if after is None:
+        return hot_list
 
     if res.status_code == 200:
         res = res.json()
         after = res.get('data').get('after')
         hots = res.get('data').get('children')
         hot_list += list(map(lambda elm: elm.get('data').get('title'), hots))
-        return recurse(subreddit, hot_list)
+        return recurse(subreddit, hot_list, after)
     return None
