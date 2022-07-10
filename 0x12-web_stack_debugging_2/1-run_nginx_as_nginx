@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# Run Nginx as Nginx
-chown nginx /etc/nginx/nginx.conf
-chmod 700 /etc/nginx/nginx.conf
-sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-sudo -u nginx bash -c 'service nginx start'
+# Changes owner & group permision nginx
+chmod 744 /etc/nginx/nginx.conf
+# Changes listening all trafic of port 80 to 8080
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+#change user
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+# Restart service nginx
+pkill -9 apache
+sudo -u nginx service nginx restart

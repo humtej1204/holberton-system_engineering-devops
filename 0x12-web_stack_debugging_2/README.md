@@ -1,1 +1,1 @@
-**Shell, Basics - Exercice 00**
+#  Web stack debugging #2
